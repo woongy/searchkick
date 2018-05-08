@@ -178,7 +178,7 @@ module Searchkick
 
     def highlights(multiple: false)
       hits.map do |hit|
-        Hash[hit["highlight"].map { |k, v| [(options[:json] ? k : k.sub(/\.#{@options[:match_suffix]}\z/, "")).to_sym, multiple ? v : v.first] }]
+        Hash[hit.fetch("highlight", []).map { |k, v| [(options[:json] ? k : k.sub(/\.#{@options[:match_suffix]}\z/, "")).to_sym, multiple ? v : v.first] }]
       end
     end
 
